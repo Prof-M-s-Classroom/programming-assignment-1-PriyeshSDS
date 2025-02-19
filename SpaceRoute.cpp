@@ -60,7 +60,21 @@ public:
             tail->next = newNode;
         }
     }
-    void addWaypointAtIndex(int index, T& data);
+    void addWaypointAtIndex(int index, T& data) {
+        if (index == 0) {
+            addWaypointAtBeginning(data);
+        }
+        else {
+            Node<T> *newNode = new Node<T>(data);
+            Node<T> *temp = head;
+            for (int i = 1; i < index; i++) {
+                temp = temp->next;
+            }
+            newNode->next = temp->next;
+            newNode->prev = temp;
+            temp->next = newNode;
+        }
+    }
     void removeWaypointAtBeginning();
     void removeWaypointAtEnd();
     void removeWaypointAtIndex(int index);
