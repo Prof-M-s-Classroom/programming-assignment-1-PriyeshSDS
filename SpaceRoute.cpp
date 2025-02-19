@@ -45,10 +45,19 @@ public:
         }
         else {
             newNode->next = head;
+            head->prev = newNode;
             head = newNode;
         }
     }
-    void addWaypointAtEnd(T& data);
+    void addWaypointAtEnd(T& data) {
+        if (head == nullptr) {
+            addWaypointAtBeginning(data);
+        }
+        else {
+            Node<T> *newNode = new Node<T>(data);
+
+        }
+    }
     void addWaypointAtIndex(int index, T& data);
     void removeWaypointAtBeginning();
     void removeWaypointAtEnd();
