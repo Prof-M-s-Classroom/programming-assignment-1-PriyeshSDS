@@ -72,11 +72,72 @@ public:
             temp->next = newNode;
         }
     }
-    void removeWaypointAtBeginning();
-    void removeWaypointAtEnd();
-    void removeWaypointAtIndex(int index);
-    void traverseForward();
-    void traverseBackward();
+    void removeWaypointAtBeginning() {
+        if (head == nullptr) {
+            return;
+        }
+        else {
+            Node<T> *temp = head;
+            head = head->next;
+            head->prev = nullptr;
+            delete temp;
+        }
+    }
+    void removeWaypointAtEnd() {
+        if (head == nullptr) {
+            return;
+        }
+        else {
+            Node<T> *temp = tail;
+            tail = tail->prev;
+            tail->next = nullptr;
+            delete temp;
+
+
+        }
+
+    }
+    void removeWaypointAtIndex(int index) {
+        if (index == 0) {
+            removeWaypointAtBeginning();
+        }
+        else {
+            //get the needed delete node
+            Node<T> *del = getWaypoint(index);
+            //get the node previous of delete node
+            Node<T> *temp = del->prev;
+            //have temp skip  over the delete node
+            temp->next = del->next;
+            //have the new temp next point to temp
+            temp->next->prev = temp;
+            delete del;
+
+        }
+    }
+    void traverseForward() {
+        if (head == nullptr) {
+            return;
+        }
+        else {
+            Node<T> *temp = head;
+            while (temp->next != nullptr) {
+                temp->print();
+                temp = temp->next;
+            }
+        }
+    }
+    void traverseBackward() {
+        if (head == nullptr) {
+            return;
+        }
+        else {
+            Node<T> *temp = tail;
+            while (temp->prev != nullptr) {
+                temp->print();
+                temp = temp->prev;
+            }
+        }
+    }
     Node<T>* getWaypoint(int index) {
         if (index == 0) {
             return head;
