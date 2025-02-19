@@ -150,7 +150,10 @@ public:
             return temp;
         }
     }
-    void setWaypoint(int index, T& data);
+    void setWaypoint(int index, T& data) {
+        Node<T> *temp = getWaypoint(index);
+        temp->data = data;
+    }
     void print(){
 
             Node<T>* current = head;
