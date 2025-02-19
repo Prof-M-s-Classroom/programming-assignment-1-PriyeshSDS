@@ -76,6 +76,7 @@ public:
             Node<T> *newNode = new Node<T>(data);
             newNode->prev = tail;
             tail->next = newNode;
+            tail = newNode;
         }
     }
     void addWaypointAtIndex(int index, T& data) {
@@ -87,7 +88,9 @@ public:
             Node<T> *temp = getWaypoint(index);
             newNode->next = temp->next;
             newNode->prev = temp;
+            temp->next->prev = newNode;
             temp->next = newNode;
+
         }
     }
     void removeWaypointAtBeginning() {
