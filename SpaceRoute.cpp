@@ -86,10 +86,9 @@ public:
         else {
             Node<T> *newNode = new Node<T>(data);
             Node<T> *temp = getWaypoint(index);
-            newNode->next = temp->next;
-            newNode->prev = temp;
-            temp->next->prev = newNode;
-            temp->next = newNode;
+            newNode->next = temp;
+            newNode->prev = temp->prev;
+            temp->prev->next = newNode;
 
         }
     }
@@ -160,8 +159,8 @@ public:
         }
     }
     Node<T>* getWaypoint(int index) {
-        if (index == 0) {
-            return head;
+        if (index < 0) {
+            return nullptr;
         }
         else {
             Node<T> *temp = head;
