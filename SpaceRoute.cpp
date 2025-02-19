@@ -126,7 +126,7 @@ public:
             //get the needed delete node
             Node<T> *del = getWaypoint(index);
             //get the node previous of delete node
-            Node<T> *temp = del->prev;
+            Node<T> *temp = getWaypoint(index - 1);
             //have temp skip  over the delete node
             temp->next = del->next;
             //have the new temp next point to temp
@@ -165,7 +165,7 @@ public:
         }
         else {
             Node<T> *temp = head;
-            for (int i = 1; i < index; i++) {
+            for (int i = 0; i < index; i++) {
                 temp = temp->next;
             }
             return temp;
