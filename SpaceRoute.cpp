@@ -66,10 +66,7 @@ public:
         }
         else {
             Node<T> *newNode = new Node<T>(data);
-            Node<T> *temp = head;
-            for (int i = 1; i < index; i++) {
-                temp = temp->next;
-            }
+            Node<T> *temp = getWaypoint(index - 1);
             newNode->next = temp->next;
             newNode->prev = temp;
             temp->next = newNode;
@@ -80,7 +77,18 @@ public:
     void removeWaypointAtIndex(int index);
     void traverseForward();
     void traverseBackward();
-    Node<T>* getWaypoint(int index);
+    Node<T>* getWaypoint(int index) {
+        if (index == 0) {
+            return head;
+        }
+        else {
+            Node<T> *temp = head;
+            for (int i = 1; i < index; i++) {
+                temp = temp->next;
+            }
+            return temp;
+        }
+    }
     void setWaypoint(int index, T& data);
     void print(){
 
