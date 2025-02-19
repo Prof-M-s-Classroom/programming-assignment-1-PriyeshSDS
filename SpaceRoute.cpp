@@ -37,7 +37,17 @@ public:
     SpaceRoute();  // Constructor
     ~SpaceRoute(); // Destructor
 
-    void addWaypointAtBeginning(T& data);
+    void addWaypointAtBeginning(T& data) {
+        Node<T> *newNode = new Node<T>(data);
+        if (head == nullptr) {
+            head = newNode;
+            tail = newNode;
+        }
+        else {
+            newNode->next = head;
+            head = newNode;
+        }
+    }
     void addWaypointAtEnd(T& data);
     void addWaypointAtIndex(int index, T& data);
     void removeWaypointAtBeginning();
