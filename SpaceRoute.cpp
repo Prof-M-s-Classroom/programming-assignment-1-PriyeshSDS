@@ -64,6 +64,13 @@ public:
         if (head == nullptr) {
             addWaypointAtBeginning(data);
         }
+        else if (head == tail) {
+            Node<T>* newNode = new Node<T>(data);
+            newNode->next = nullptr;
+            newNode->prev = head;
+            head->next = newNode;
+            tail = newNode;
+        }
         else {
             //Make sure to set prev and next correctly
             Node<T> *newNode = new Node<T>(data);
@@ -77,7 +84,7 @@ public:
         }
         else {
             Node<T> *newNode = new Node<T>(data);
-            Node<T> *temp = getWaypoint(index - 1);
+            Node<T> *temp = getWaypoint(index);
             newNode->next = temp->next;
             newNode->prev = temp;
             temp->next = newNode;
@@ -131,7 +138,7 @@ public:
         }
         else {
             Node<T> *temp = head;
-            while (temp->next != nullptr) {
+            while (temp != nullptr) {
                 temp->print();
                 temp = temp->next;
             }
@@ -143,7 +150,7 @@ public:
         }
         else {
             Node<T> *temp = tail;
-            while (temp->prev != nullptr) {
+            while (temp != nullptr) {
                 temp->print();
                 temp = temp->prev;
             }
