@@ -54,8 +54,10 @@ public:
             addWaypointAtBeginning(data);
         }
         else {
+            //Make sure to set prev and next correctly
             Node<T> *newNode = new Node<T>(data);
-
+            newNode->prev = tail;
+            tail->next = newNode;
         }
     }
     void addWaypointAtIndex(int index, T& data);
