@@ -34,8 +34,19 @@ private:
     Node<T>* tail;
 
 public:
-    SpaceRoute();  // Constructor
-    ~SpaceRoute(); // Destructor
+    SpaceRoute() {
+        head = nullptr;
+        tail = nullptr;
+    }// Constructor
+    ~SpaceRoute() {
+        Node<T>* temp = head;
+        while (temp != nullptr) {
+            head = head->next;
+            delete temp;
+            temp = head;
+        }
+
+    } // Destructor
 
     void addWaypointAtBeginning(T& data) {
         Node<T> *newNode = new Node<T>(data);
