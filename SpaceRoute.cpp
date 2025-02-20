@@ -89,6 +89,8 @@ public:
             newNode->next = temp;
             newNode->prev = temp->prev;
             temp->prev->next = newNode;
+            temp->prev = newNode;
+
 
         }
     }
