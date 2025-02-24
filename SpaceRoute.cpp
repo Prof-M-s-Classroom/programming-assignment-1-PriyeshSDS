@@ -49,28 +49,26 @@ public:
     } // Destructor
 
     void addWaypointAtBeginning(T& data) {
+        //Create new Node
         Node<T> *newNode = new Node<T>(data);
+        //If the head node is null set head and tail to new Node
         if (head == nullptr) {
             head = newNode;
             tail = newNode;
         }
         else {
+            //Otherwise set New Nodes next to the current head, and the current heads prev to New Node then set head to NewNode
             newNode->next = head;
             head->prev = newNode;
             head = newNode;
         }
     }
     void addWaypointAtEnd(T& data) {
+        //If head is null then addWapointAtEnd is the same as add at begin
         if (head == nullptr) {
             addWaypointAtBeginning(data);
         }
-        else if (head == tail) {
-            Node<T>* newNode = new Node<T>(data);
-            newNode->next = nullptr;
-            newNode->prev = head;
-            head->next = newNode;
-            tail = newNode;
-        }
+        //Otherwise create a newNode and set its prev pointer to tail and tail next to new node then tail to newNode
         else {
             //Make sure to set prev and next correctly
             Node<T> *newNode = new Node<T>(data);
@@ -80,35 +78,46 @@ public:
         }
     }
     void addWaypointAtIndex(int index, T& data) {
+        //If index is 0 then add at Begining
         if (index == 0) {
             addWaypointAtBeginning(data);
         }
         else {
+            //Create new Node
             Node<T> *newNode = new Node<T>(data);
+            //Get the current node at the index
             Node<T> *temp = getWaypoint(index);
+            //set new nodes next to temp and newnodes prev to temps prev,
             newNode->next = temp;
             newNode->prev = temp->prev;
+            //set temp prev nodes next to newNode
             temp->prev->next = newNode;
+            //Lastly set temp prev to newNode
             temp->prev = newNode;
 
 
         }
     }
     void removeWaypointAtBeginning() {
+        //If head is already null then return
         if (head == nullptr) {
             return;
         }
+        //Otherwise create a temp poijnter to head and then set head to head next and set the new head prev to null
         else {
             Node<T> *temp = head;
             head = head->next;
             head->prev = nullptr;
+            //delete temp(old head)
             delete temp;
         }
     }
     void removeWaypointAtEnd() {
-        if (head == nullptr) {
+        //if tail is null return
+        if (tail == nullptr) {
             return;
         }
+        //same setup as the remove at begin
         else {
             Node<T> *temp = tail;
             tail = tail->prev;
@@ -120,6 +129,7 @@ public:
 
     }
     void removeWaypointAtIndex(int index) {
+        //if the remove index is 0 call remove at begin
         if (index == 0) {
             removeWaypointAtBeginning();
         }
@@ -127,7 +137,7 @@ public:
             //get the needed delete node
             Node<T> *del = getWaypoint(index);
             //get the node previous of delete node
-            Node<T> *temp = getWaypoint(index - 1);
+            Node<T> *temp = del->prev;
             //have temp skip  over the delete node
             temp->next = del->next;
             //have the new temp next point to temp
@@ -137,10 +147,12 @@ public:
         }
     }
     void traverseForward() {
+        //if empty return
         if (head == nullptr) {
             return;
         }
         else {
+            //loop through and print till null
             Node<T> *temp = head;
             while (temp != nullptr) {
                 temp->print();
@@ -149,6 +161,7 @@ public:
         }
     }
     void traverseBackward() {
+        //if empty return
         if (head == nullptr) {
             return;
         }
@@ -161,10 +174,12 @@ public:
         }
     }
     Node<T>* getWaypoint(int index) {
+        //if index is less than 0 return null
         if (index < 0) {
             return nullptr;
         }
         else {
+            //start at head and loop through till index
             Node<T> *temp = head;
             for (int i = 0; i < index; i++) {
                 temp = temp->next;
