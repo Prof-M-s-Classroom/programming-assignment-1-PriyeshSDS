@@ -188,7 +188,9 @@ public:
         }
     }
     void setWaypoint(int index, T& data) {
+        //use get Waypoint
         Node<T> *temp = getWaypoint(index);
+        //set temp data to given data
         temp->data = data;
     }
     void print(){
