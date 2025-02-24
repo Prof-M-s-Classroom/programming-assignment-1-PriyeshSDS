@@ -21,5 +21,6 @@ Node<T>* getWaypoint(int index): set temp node to head and uses a for loop till 
 
 void setWaypoint(int index, T& data): this uses getWaypoint at index so its O(n) and then sets its data to the given data.
 
+void print(): set Node current to head and while current exists use the current nodes pritn method and then current is currrent next. this is O(n)
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/j-DzvjBA)
